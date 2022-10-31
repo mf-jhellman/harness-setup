@@ -1,0 +1,25 @@
+inputSet:
+  identifier: "testing"
+  pipeline:
+    identifier: "zztestcanarydeployment"
+    stages:
+    - stage:
+        identifier: "Canary_Deploy_App"
+        type: "Deployment"
+        spec:
+          execution:
+            steps:
+            - stepGroup:
+                identifier: "canaryDepoyment"
+                steps:
+                - step:
+                    identifier: "canaryDeployment"
+                    type: "K8sCanaryDeploy"
+                    spec:
+                      instanceSelection:
+                        type: "Count"
+                        spec:
+                          count: 2
+  name: "testing"
+  orgIdentifier: "default"
+  projectIdentifier: "tiger"
