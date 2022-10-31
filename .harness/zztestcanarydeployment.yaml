@@ -27,6 +27,9 @@ pipeline:
                       userGroups:
                         - account._account_all_users
                     approverInputs: []
+                  when:
+                    stageStatus: Failure
+                  failureStrategies: []
         tags: {}
     - stage:
         name: Provision Infrastructure
