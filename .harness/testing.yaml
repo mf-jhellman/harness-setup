@@ -1,8 +1,19 @@
 inputSet:
   identifier: "testing"
+  name: "testing"
+  tags: {}
+  orgIdentifier: "default"
+  projectIdentifier: "tiger"
   pipeline:
     identifier: "zztestcanarydeployment"
     stages:
+    - stage:
+        identifier: "Provision_Infrastructure"
+        type: "Custom"
+        variables:
+        - name: "target_env"
+          type: "String"
+          value: "dev"
     - stage:
         identifier: "Canary_Deploy_App"
         type: "Deployment"
@@ -20,6 +31,3 @@ inputSet:
                         type: "Count"
                         spec:
                           count: 2
-  name: "testing"
-  orgIdentifier: "default"
-  projectIdentifier: "tiger"
