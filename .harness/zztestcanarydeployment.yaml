@@ -46,6 +46,7 @@ pipeline:
                   spec:
                     configuration:
                       command: Apply
+                      workspace: <+trigger.sourceBranch>
                       configFiles:
                         store:
                           type: Github
@@ -56,6 +57,20 @@ pipeline:
                             branch: jared-wip
                             folderPath: deploy/terraform
                       secretManagerRef: harnessSecretManager
+                      varFiles:
+                        - varFile:
+                            type: Remote
+                            identifier: target vars
+                            spec:
+                              store:
+                                type: Github
+                                spec:
+                                  gitFetchType: Branch
+                                  repoName: harness-test-app
+                                  paths:
+                                    - deploy/terraform/vars/<+trigger.sourceBranch>.tfvars
+                                  branch: <+trigger.sourceBranch>
+                                  connectorRef: mfjhellman
                     provisionerIdentifier: zztest
                   timeout: 10m
               - step:
