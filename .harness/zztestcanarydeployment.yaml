@@ -46,7 +46,7 @@ pipeline:
                   spec:
                     configuration:
                       command: Apply
-                      workspace: <+trigger.sourceBranch>
+                      workspace: <+stage.variables.target_env>
                       configFiles:
                         store:
                           type: Github
@@ -67,9 +67,9 @@ pipeline:
                                 spec:
                                   gitFetchType: Branch
                                   repoName: harness-test-app
+                                  branch: jared-wip
                                   paths:
-                                    - deploy/terraform/vars/<+trigger.sourceBranch>.tfvars
-                                  branch: <+trigger.sourceBranch>
+                                    - deploy/terraform/vars/<+stage.variables.target_env>
                                   connectorRef: mfjhellman
                     provisionerIdentifier: zztest
                   timeout: 10m
@@ -97,6 +97,11 @@ pipeline:
                     provisionerIdentifier: zztest
                   timeout: 10m
         tags: {}
+        variables:
+          - name: target_env
+            type: String
+            description: ""
+            value: ""
     - stage:
         name: Canary Deploy App
         identifier: Canary_Deploy_App
