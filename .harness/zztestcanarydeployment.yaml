@@ -101,7 +101,7 @@ pipeline:
           - name: target_env
             type: String
             description: ""
-            value: ""
+            value: <+input>
     - stage:
         name: Canary Deploy App
         identifier: Canary_Deploy_App
