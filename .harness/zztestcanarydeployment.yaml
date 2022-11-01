@@ -69,7 +69,7 @@ pipeline:
                                   repoName: harness-test-app
                                   branch: jared-wip
                                   paths:
-                                    - deploy/terraform/vars/<+stage.variables.target_env>
+                                    - deploy/terraform/vars/<+stage.variables.target_env>.tfvars
                                   connectorRef: mfjhellman
                     provisionerIdentifier: zztest
                   timeout: 10m
