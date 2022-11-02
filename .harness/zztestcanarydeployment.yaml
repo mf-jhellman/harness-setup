@@ -111,6 +111,19 @@ pipeline:
           deploymentType: Kubernetes
           service:
             serviceRef: zztest
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  manifests:
+                    - manifest:
+                        identifier: zztest
+                        type: HelmChart
+                        spec:
+                          store:
+                            type: Github
+                            spec:
+                              branch: <+input>
           environment:
             environmentRef: cdtooling2eksv2
             deployToAll: false
@@ -132,6 +145,7 @@ pipeline:
                             spec:
                               count: <+input>
                           skipDryRun: false
+                        failureStrategies: []
                     - step:
                         name: Canary Delete
                         identifier: canaryDelete
