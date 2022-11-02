@@ -1,6 +1,7 @@
 inputSet:
   identifier: "dev"
   name: "dev"
+  tags: {}
   orgIdentifier: "default"
   projectIdentifier: "tiger"
   pipeline:
@@ -17,6 +18,20 @@ inputSet:
         identifier: "Canary_Deploy_App"
         type: "Deployment"
         spec:
+          service:
+            serviceInputs:
+              serviceDefinition:
+                type: "Kubernetes"
+                spec:
+                  manifests:
+                  - manifest:
+                      identifier: "zztest"
+                      type: "HelmChart"
+                      spec:
+                        store:
+                          type: "Github"
+                          spec:
+                            branch: "jared-wip"
           execution:
             steps:
             - stepGroup:
