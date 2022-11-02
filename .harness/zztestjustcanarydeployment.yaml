@@ -4,8 +4,8 @@ pipeline:
   tags: {}
   stages:
     - stage:
-        name: Canary Deploy App
-        identifier: Canary_Deploy_App
+        name: deploy
+        identifier: deploy
         description: ""
         type: Deployment
         spec:
@@ -28,33 +28,26 @@ pipeline:
           environment:
             environmentRef: cdtooling2eksv2
             deployToAll: false
-            infrastructureDefinitions: <+input>
+            infrastructureDefinitions:
+              - identifier: harnessdev
           execution:
             steps:
               - step:
-                  type: K8sCanaryDeploy
-                  name: canary-deploy
-                  identifier: canarydeploy
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
                   spec:
                     skipDryRun: false
-                    instanceSelection:
-                      type: Count
-                      spec:
-                        count: <+input>
-                  timeout: 10m
+                    pruningEnabled: false
             rollbackSteps:
               - step:
-                  name: Canary Delete
-                  identifier: rollbackCanaryDelete
-                  type: K8sCanaryDelete
-                  timeout: 10m
-                  spec: {}
-              - step:
-                  name: Rolling Rollback
-                  identifier: rollingRollback
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
                   type: K8sRollingRollback
                   timeout: 10m
-                  spec: {}
+                  spec:
+                    pruningEnabled: false
         tags: {}
         failureStrategies:
           - onFailure:
