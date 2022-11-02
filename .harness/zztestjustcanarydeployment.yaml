@@ -11,14 +11,14 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: zztest
+            serviceRef: zztest2
             serviceInputs:
               serviceDefinition:
                 type: Kubernetes
                 spec:
                   manifests:
                     - manifest:
-                        identifier: zztest
+                        identifier: hello-world
                         type: HelmChart
                         spec:
                           store:
