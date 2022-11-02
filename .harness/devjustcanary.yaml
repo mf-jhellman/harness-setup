@@ -1,0 +1,39 @@
+inputSet:
+  identifier: "devjustcanary"
+  name: "dev-just-canary"
+  orgIdentifier: "default"
+  projectIdentifier: "tiger"
+  pipeline:
+    identifier: "zztestjustcanarydeployment"
+    stages:
+    - stage:
+        identifier: "Canary_Deploy_App"
+        type: "Deployment"
+        spec:
+          service:
+            serviceInputs:
+              serviceDefinition:
+                type: "Kubernetes"
+                spec:
+                  manifests:
+                  - manifest:
+                      identifier: "zztest"
+                      type: "HelmChart"
+                      spec:
+                        store:
+                          type: "Github"
+                          spec:
+                            branch: "jared-wip"
+          execution:
+            steps:
+            - stepGroup:
+                identifier: "canaryDepoyment"
+                steps:
+                - step:
+                    identifier: "canaryDeployment"
+                    type: "K8sCanaryDeploy"
+                    spec:
+                      instanceSelection:
+                        type: "Count"
+                        spec:
+                          count: 2
