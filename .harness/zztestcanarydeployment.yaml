@@ -146,12 +146,6 @@ pipeline:
                               count: <+input>
                           skipDryRun: false
                         failureStrategies: []
-                    - step:
-                        name: Canary Delete
-                        identifier: canaryDelete
-                        type: K8sCanaryDelete
-                        timeout: 10m
-                        spec: {}
               - stepGroup:
                   name: Primary Deployment
                   identifier: primaryDepoyment
