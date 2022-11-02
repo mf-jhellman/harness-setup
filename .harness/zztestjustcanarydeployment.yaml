@@ -31,22 +31,17 @@ pipeline:
             infrastructureDefinitions: <+input>
           execution:
             steps:
-              - stepGroup:
-                  name: Canary Deployment
-                  identifier: canaryDepoyment
-                  steps:
-                    - step:
-                        name: Canary Deployment
-                        identifier: canaryDeployment
-                        type: K8sCanaryDeploy
-                        timeout: 10m
-                        spec:
-                          instanceSelection:
-                            type: Count
-                            spec:
-                              count: <+input>
-                          skipDryRun: false
-                        failureStrategies: []
+              - step:
+                  type: K8sCanaryDeploy
+                  name: canary-deploy
+                  identifier: canarydeploy
+                  spec:
+                    skipDryRun: false
+                    instanceSelection:
+                      type: Count
+                      spec:
+                        count: <+input>
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Canary Delete
