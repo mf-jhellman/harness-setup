@@ -128,6 +128,18 @@ pipeline:
               - identifier: harnessdev
           execution:
             steps:
+              - step:
+                  type: K8sApply
+                  name: Manage Base Resources
+                  identifier: Manage_Base_Resources
+                  spec:
+                    filePaths:
+                      - deploy/k8s/base
+                    skipDryRun: false
+                    skipSteadyStateCheck: false
+                    skipRendering: false
+                    overrides: []
+                  timeout: 10m
               - stepGroup:
                   name: Canary Deployment
                   identifier: canaryDepoyment
