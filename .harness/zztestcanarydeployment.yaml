@@ -104,8 +104,8 @@ pipeline:
         when:
           pipelineStatus: Failure
     - stage:
-        name: Canary Deploy App
-        identifier: Canary_Deploy_App
+        name: Canary Deploy
+        identifier: Canary_Deploy
         description: ""
         type: Deployment
         spec:
@@ -116,15 +116,10 @@ pipeline:
               serviceDefinition:
                 type: Kubernetes
                 spec:
-                  manifests:
-                    - manifest:
-                        identifier: zztest
-                        type: HelmChart
-                        spec:
-                          store:
-                            type: Github
-                            spec:
-                              branch: <+input>
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
           environment:
             environmentRef: cdtooling2eksv2
             deployToAll: false
@@ -144,9 +139,14 @@ pipeline:
                           instanceSelection:
                             type: Count
                             spec:
-                              count: <+input>
+                              count: 1
                           skipDryRun: false
-                        failureStrategies: []
+                    - step:
+                        name: Canary Delete
+                        identifier: canaryDelete
+                        type: K8sCanaryDelete
+                        timeout: 10m
+                        spec: {}
               - stepGroup:
                   name: Primary Deployment
                   identifier: primaryDepoyment
@@ -157,9 +157,7 @@ pipeline:
                         type: K8sRollingDeploy
                         timeout: 10m
                         spec:
-                          skipDryRun: true
-                          pruningEnabled: false
-                        failureStrategies: []
+                          skipDryRun: false
             rollbackSteps:
               - step:
                   name: Canary Delete
