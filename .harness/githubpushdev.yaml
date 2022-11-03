@@ -1,6 +1,7 @@
 inputSet:
   identifier: "githubpushdev"
   name: "github-push-dev"
+  tags: {}
   orgIdentifier: "default"
   projectIdentifier: "tiger"
   pipeline:
