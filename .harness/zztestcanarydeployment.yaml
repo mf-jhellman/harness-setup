@@ -6,6 +6,31 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: Approve to Start Deployment
+        identifier: Approve_to_Start_Deployment
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: Approve to Start Deployment
+                  identifier: Approve_to_Start_Deployment
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: Approve to start the deployment
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - account._account_all_users
+                    approverInputs: []
+        tags: {}
+        when:
+          pipelineStatus: Failure
+    - stage:
         name: Provision Infrastructure
         identifier: Provision_Infrastructure
         description: ""
