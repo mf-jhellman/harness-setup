@@ -99,6 +99,7 @@ pipeline:
         variables:
           - name: target_env
             type: String
+            default: dev
             description: ""
             value: <+input>
         when:
