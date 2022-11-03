@@ -178,3 +178,8 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+        variables:
+          - name: name
+            type: String
+            description: ""
+            value: hello-world
