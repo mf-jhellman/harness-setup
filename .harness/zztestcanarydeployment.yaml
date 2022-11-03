@@ -134,11 +134,24 @@ pipeline:
                   identifier: Manage_Base_Resources
                   spec:
                     filePaths:
-                      - base
+                      - base/namespace.yaml
                     skipDryRun: false
                     skipSteadyStateCheck: false
                     skipRendering: false
-                    overrides: []
+                    overrides:
+                      - manifest:
+                          identifier: " base"
+                          type: Values
+                          spec:
+                            store:
+                              type: Github
+                              spec:
+                                connectorRef: mfjhellman
+                                gitFetchType: Branch
+                                paths:
+                                  - deploy/k8s/base/values.yaml
+                                repoName: harness-test-app
+                                branch: jared-wip
                   timeout: 10m
                   failureStrategies: []
               - stepGroup:
