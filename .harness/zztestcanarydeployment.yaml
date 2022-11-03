@@ -134,12 +134,13 @@ pipeline:
                   identifier: Manage_Base_Resources
                   spec:
                     filePaths:
-                      - deploy/k8s/base
+                      - base
                     skipDryRun: false
                     skipSteadyStateCheck: false
                     skipRendering: false
                     overrides: []
                   timeout: 10m
+                  failureStrategies: []
               - stepGroup:
                   name: Canary Deployment
                   identifier: canaryDepoyment
