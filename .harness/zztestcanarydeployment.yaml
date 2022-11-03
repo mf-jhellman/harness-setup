@@ -76,6 +76,8 @@ pipeline:
             type: String
             description: ""
             value: <+input>
+        when:
+          pipelineStatus: Failure
     - stage:
         name: Canary Deploy App
         identifier: Canary_Deploy_App
