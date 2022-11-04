@@ -169,12 +169,49 @@ pipeline:
                             spec:
                               count: 1
                           skipDryRun: false
+                        failureStrategies: []
+                    - step:
+                        type: Verify
+                        name: No Errors in New Relic
+                        identifier: No_Errors_in_New_Relic
+                        spec:
+                          type: Canary
+                          monitoredService:
+                            type: Default
+                            spec: {}
+                          spec:
+                            sensitivity: HIGH
+                            duration: 5m
+                            deploymentTag: <+serviceConfig.artifacts.primary.tag>
+                        timeout: 2h
+                        failureStrategies:
+                          - onFailure:
+                              errors:
+                                - Verification
+                              action:
+                                type: ManualIntervention
+                                spec:
+                                  timeout: 2h
+                                  onTimeout:
+                                    action:
+                                      type: StageRollback
+                          - onFailure:
+                              errors:
+                                - Unknown
+                              action:
+                                type: ManualIntervention
+                                spec:
+                                  timeout: 2h
+                                  onTimeout:
+                                    action:
+                                      type: Ignore
                     - step:
                         name: Canary Delete
                         identifier: canaryDelete
                         type: K8sCanaryDelete
                         timeout: 10m
-                        spec: {}
+                        spec:
+                          skipDryRun: false
               - stepGroup:
                   name: Primary Deployment
                   identifier: primaryDepoyment
