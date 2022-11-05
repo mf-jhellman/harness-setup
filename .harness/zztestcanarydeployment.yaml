@@ -165,15 +165,15 @@ pipeline:
                         timeout: 10m
                         spec:
                           instanceSelection:
-                            type: Count
                             spec:
-                              count: 1
+                              percentage: 50
+                            type: Percentage
                           skipDryRun: false
                         failureStrategies: []
                     - step:
                         type: Verify
-                        name: No Errors in New Relic
-                        identifier: No_Errors_in_New_Relic
+                        name: Verify via New Relic
+                        identifier: Verify_via_New_Relic
                         spec:
                           type: Canary
                           monitoredService:
