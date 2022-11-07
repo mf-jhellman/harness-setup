@@ -135,6 +135,8 @@ pipeline:
                   spec:
                     filePaths:
                       - base/namespace.yaml
+                      - base/ingress.yaml
+                      - base/service.yaml
                     skipDryRun: false
                     skipSteadyStateCheck: false
                     skipRendering: false
