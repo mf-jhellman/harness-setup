@@ -103,7 +103,7 @@ pipeline:
             description: ""
             value: <+input>
         when:
-          pipelineStatus: Failure
+          pipelineStatus: Success
     - stage:
         name: Canary Deploy
         identifier: Canary_Deploy
