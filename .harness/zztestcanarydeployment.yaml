@@ -62,7 +62,7 @@ pipeline:
                   spec:
                     configuration:
                       command: Apply
-                      workspace: zztest-<+stage.spec.infrastructure>
+                      workspace: zztest-<+stage.spec.infrastructure.name>
                       configFiles:
                         store:
                           type: Github
@@ -85,9 +85,9 @@ pipeline:
                                   repoName: harness-test-app
                                   branch: main
                                   paths:
-                                    - deploy/terraform/vars/<+stage.spec.infrastructure>.tfvars
+                                    - deploy/terraform/vars/<+stage.spec.infrastructure.name>.tfvars
                                   connectorRef: mfjhellman
-                    provisionerIdentifier: zztest-<+stage.spec.infrastructure>
+                    provisionerIdentifier: zztest-<+stage.spec.infrastructure.name>
                   timeout: 10m
               - step:
                   type: HarnessApproval
