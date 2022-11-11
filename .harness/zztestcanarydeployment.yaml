@@ -106,6 +106,58 @@ pipeline:
         when:
           pipelineStatus: Failure
     - stage:
+        name: Provision Infra
+        identifier: Provision_Infra
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: zztest
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: <+input>
+            deployToAll: false
+            environmentInputs: <+input>
+            serviceOverrideInputs: <+input>
+            infrastructureDefinitions: <+input>
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: Terraform Plan
+                  identifier: Terraform_Plan
+                  spec:
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          type: Github
+                          spec:
+                            gitFetchType: Branch
+                            connectorRef: mfjhellman
+                            repoName: harness-test-app
+                            branch: main
+                            folderPath: deploy/terreform
+                      secretManagerRef: harnessSecretManager
+                    provisionerIdentifier: zztest
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+    - stage:
         name: Canary Deploy
         identifier: Canary_Deploy
         description: ""
@@ -123,8 +175,10 @@ pipeline:
                       primaryArtifactRef: <+input>
                       sources: <+input>
           environment:
-            environmentRef: cdtooling2eksv2
+            environmentRef: <+input>
             deployToAll: false
+            environmentInputs: <+input>
+            serviceOverrideInputs: <+input>
             infrastructureDefinitions: <+input>
           execution:
             steps:
