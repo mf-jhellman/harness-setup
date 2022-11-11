@@ -124,8 +124,7 @@ pipeline:
           environment:
             environmentRef: cdtooling2eksv2
             deployToAll: false
-            infrastructureDefinitions:
-              - identifier: harnessdev
+            infrastructureDefinitions: <+input>
           execution:
             steps:
               - step:
