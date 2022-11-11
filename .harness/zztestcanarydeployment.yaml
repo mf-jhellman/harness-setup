@@ -70,7 +70,7 @@ pipeline:
                                   paths:
                                     - deploy/terraform/vars/<+stage.variables.target_env>.tfvars
                                   connectorRef: mfjhellman
-                    provisionerIdentifier: zztest
+                    provisionerIdentifier: zztest-<+stage.variables.target_env>
                   timeout: 10m
               - step:
                   type: HarnessApproval
@@ -93,7 +93,7 @@ pipeline:
                   spec:
                     configuration:
                       type: InheritFromPlan
-                    provisionerIdentifier: zztest
+                    provisionerIdentifier: zztest-<+stage.variables.target_env>
                   timeout: 10m
         tags: {}
         variables:
