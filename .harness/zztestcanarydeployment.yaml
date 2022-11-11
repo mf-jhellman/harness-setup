@@ -75,7 +75,7 @@ pipeline:
                                   connectorRef: mfjhellman
                                   repoName: harness-test-app
                                   branch: <+input>
-                                  folderPath: terraform/deploy
+                                  folderPath: deploy/terraform
                             secretManagerRef: harnessSecretManager
                             varFiles:
                               - varFile:
