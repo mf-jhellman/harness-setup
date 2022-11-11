@@ -7,13 +7,6 @@ inputSet:
     identifier: "zztestcanarydeployment"
     stages:
     - stage:
-        identifier: "Provision_Infrastructure"
-        type: "Custom"
-        variables:
-        - name: "target_env"
-          type: "String"
-          value: "pr-<+trigger.prNumber>"
-    - stage:
         identifier: "Canary_Deploy"
         type: "Deployment"
         spec:
