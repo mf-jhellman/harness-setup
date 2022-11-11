@@ -103,7 +103,7 @@ pipeline:
             description: ""
             value: <+input>
         when:
-          pipelineStatus: Success
+          pipelineStatus: Failure
     - stage:
         name: Canary Deploy
         identifier: Canary_Deploy
@@ -207,6 +207,8 @@ pipeline:
                                   onTimeout:
                                     action:
                                       type: Ignore
+                        when:
+                          stageStatus: Failure
                     - step:
                         name: Canary Delete
                         identifier: canaryDelete
