@@ -1,6 +1,7 @@
 inputSet:
   identifier: "primage"
   name: "primage"
+  tags: {}
   orgIdentifier: "default"
   projectIdentifier: "tiger"
   pipeline:
@@ -21,7 +22,8 @@ inputSet:
                       sources:
                       - identifier: "http-echo"
                         type: "DockerRegistry"
-                        spec: {}
+                        spec:
+                          tag: "<+input>"
           environment:
             environmentRef: "cdtooling2eksv2"
             infrastructureDefinitions:
@@ -30,7 +32,7 @@ inputSet:
                 identifier: "ephemeralenv"
                 type: "KubernetesDirect"
                 spec:
-                  namespace: "pr-<+artifact.metadata.tag>"
+                  namespace: "<+trigger.artifact.build>"
           execution:
             steps:
             - stepGroup:
@@ -58,4 +60,4 @@ inputSet:
         variables:
         - name: "target_env"
           type: "String"
-          value: "pr-<+artifact.metadata.tag>"
+          value: "<+trigger.artifact.build>"
