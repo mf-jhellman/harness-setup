@@ -1,6 +1,7 @@
 inputSet:
   identifier: "prephenv"
   name: "prephenv"
+  tags: {}
   orgIdentifier: "default"
   projectIdentifier: "tiger"
   pipeline:
@@ -22,7 +23,7 @@ inputSet:
                       - identifier: "http-echo"
                         type: "DockerRegistry"
                         spec:
-                          tag: "0.0.2-alpine"
+                          tag: "<+input>"
           environment:
             environmentRef: "cdtooling2eksv2"
             infrastructureDefinitions:
@@ -59,4 +60,4 @@ inputSet:
         variables:
         - name: "target_env"
           type: "String"
-          value: "pr-<+trigger.prNumber>"
+          value: "dev"
