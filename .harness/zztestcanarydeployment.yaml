@@ -83,7 +83,7 @@ pipeline:
                         spec:
                           configuration:
                             command: Apply
-                            workspace: zztest-<+stage.variables.target_env>
+                            workspace: zztest-<+infra.namespace>
                             configFiles:
                               store:
                                 type: Github
