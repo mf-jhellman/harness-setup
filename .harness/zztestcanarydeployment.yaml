@@ -108,7 +108,7 @@ pipeline:
                                         paths:
                                           - deploy/terraform/vars/<+stage.variables.target_env>.tfvars
                                         connectorRef: mfjhellman
-                          provisionerIdentifier: <+execution.steps.Provision_Infrastructure.steps.Generate_Provisioner_ID.output.outputVariables.provisioner_id>
+                          provisionerIdentifier: zztest<+execution.steps.Provision_Infrastructure.steps.Generate_Provisioner_ID.output.outputVariables.provisioner_id>
                         timeout: 10m
                     - step:
                         type: TerraformApply
@@ -117,7 +117,7 @@ pipeline:
                         spec:
                           configuration:
                             type: InheritFromPlan
-                          provisionerIdentifier: <+execution.steps.Provision_Infrastructure.steps.Generate_Provisioner_ID.output.outputVariables.provisioner_id>
+                          provisionerIdentifier: zztest<+execution.steps.Provision_Infrastructure.steps.Generate_Provisioner_ID.output.outputVariables.provisioner_id>
                         timeout: 10m
               - stepGroup:
                   name: Canary Deployment
