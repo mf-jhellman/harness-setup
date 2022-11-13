@@ -108,6 +108,11 @@ pipeline:
                                         paths:
                                           - deploy/terraform/vars/<+stage.variables.target_env>.tfvars
                                         connectorRef: mfjhellman
+                              - varFile:
+                                  identifier: based on harness vars
+                                  spec:
+                                    content: env="<+infra.namespace>"
+                                  type: Inline
                           provisionerIdentifier: zztest<+execution.steps.Provision_Infrastructure.steps.Generate_Provisioner_ID.output.outputVariables.provisioner_id>
                         timeout: 10m
                     - step:
