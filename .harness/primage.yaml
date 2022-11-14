@@ -23,7 +23,7 @@ inputSet:
                       - identifier: "http-echo"
                         type: "DockerRegistry"
                         spec:
-                          tag: "<+trigger.artifact.build>"
+                          tag: "<+input>"
           environment:
             environmentRef: "cdtooling2eksv2"
             infrastructureDefinitions:
@@ -60,4 +60,4 @@ inputSet:
         variables:
         - name: "target_env"
           type: "String"
-          value: "<+trigger.artifact.build>"
+          value: "dev"
