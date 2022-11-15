@@ -91,25 +91,25 @@ pipeline:
                                   gitFetchType: Branch
                                   connectorRef: mfjhellman
                                   repoName: harness-test-app
-                                  branch: <+input>
                                   folderPath: deploy/terraform
+                                  branch: <+stage.variables.tfconfig_branch>
                             secretManagerRef: harnessSecretManager
                             varFiles:
                               - varFile:
                                   type: Remote
-                                  identifier: env vars
+                                  identifier: from repo
                                   spec:
                                     store:
                                       type: Github
                                       spec:
                                         gitFetchType: Branch
                                         repoName: harness-test-app
-                                        branch: <+input>
+                                        branch: <+stage.variables.tfvars_branch>
                                         paths:
                                           - deploy/terraform/vars/<+stage.variables.target_env>.tfvars
                                         connectorRef: mfjhellman
                               - varFile:
-                                  identifier: based on harness vars
+                                  identifier: from harness vars
                                   spec:
                                     content: env="<+infra.namespace>"
                                   type: Inline
@@ -263,6 +263,18 @@ pipeline:
             description: ""
             value: hello-world
           - name: target_env
+            type: String
+            description: ""
+            value: <+input>
+          - name: manifest_branch
+            type: String
+            description: ""
+            value: <+input>
+          - name: tfvars_branch
+            type: String
+            description: ""
+            value: <+input>
+          - name: tfconfig_branch
             type: String
             description: ""
             value: <+input>
