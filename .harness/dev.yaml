@@ -1,6 +1,7 @@
 inputSet:
   identifier: "dev"
   name: "dev"
+  tags: {}
   orgIdentifier: "default"
   projectIdentifier: "tiger"
   pipeline:
@@ -22,10 +23,21 @@ inputSet:
                       - identifier: "http-echo"
                         type: "DockerRegistry"
                         spec:
-                          tag: "0.0.2-alpine"
+                          tag: "<+input>"
           environment:
             environmentRef: "cdtooling2eksv2"
+            infrastructureDefinitions:
+            - identifier: "harnessdev"
         variables:
         - name: "target_env"
           type: "String"
           value: "dev"
+        - name: "manifest_branch"
+          type: "String"
+          value: "main"
+        - name: "tfvars_branch"
+          type: "String"
+          value: "main"
+        - name: "tfconfig_branch"
+          type: "String"
+          value: "main"
