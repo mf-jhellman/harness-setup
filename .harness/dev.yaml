@@ -25,32 +25,6 @@ inputSet:
                           tag: "0.0.2-alpine"
           environment:
             environmentRef: "cdtooling2eksv2"
-            infrastructureDefinitions:
-            - identifier: "harnessdev"
-          execution:
-            steps:
-            - stepGroup:
-                identifier: "Provision_Infrastructure"
-                steps:
-                - step:
-                    identifier: "Terraform_Plan"
-                    type: "TerraformPlan"
-                    spec:
-                      configuration:
-                        configFiles:
-                          store:
-                            type: "Github"
-                            spec:
-                              branch: "main"
-                        varFiles:
-                        - varFile:
-                            identifier: "env vars"
-                            type: "Remote"
-                            spec:
-                              store:
-                                type: "Github"
-                                spec:
-                                  branch: "main"
         variables:
         - name: "target_env"
           type: "String"
