@@ -34,9 +34,6 @@ inputSet:
                 spec:
                   namespace: "pr-<+trigger.prNumber>"
         variables:
-        - name: "target_env"
-          type: "String"
-          value: "dev"
         - name: "manifest_branch"
           type: "String"
           value: "main"
