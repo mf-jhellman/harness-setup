@@ -268,7 +268,7 @@ pipeline:
             value: <+input>
           - name: tfvars_branch
             type: String
-            description: "Branch of app repo to use for terraform variables files"
+            description: "Branch of app repo to use for terraform variables files "
             value: <+input>
           - name: tfconfig_branch
             type: String
