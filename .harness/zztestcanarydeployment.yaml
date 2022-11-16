@@ -106,7 +106,7 @@ pipeline:
                                         repoName: harness-test-app
                                         branch: <+stage.variables.tfvars_branch>
                                         paths:
-                                          - deploy/terraform/vars/<+stage.variables.target_env>.tfvars
+                                          - deploy/terraform/vars/<+stage.variables.tfvars_env>.tfvars
                                         connectorRef: mfjhellman
                               - varFile:
                                   identifier: from harness vars
@@ -262,7 +262,7 @@ pipeline:
             type: String
             description: ""
             value: hello-world
-          - name: target_env
+          - name: tfvars_env
             type: String
             description: ""
             value: <+input>
