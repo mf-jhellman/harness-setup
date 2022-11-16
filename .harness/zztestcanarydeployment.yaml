@@ -106,7 +106,7 @@ pipeline:
                                         repoName: harness-test-app
                                         branch: <+stage.variables.tfvars_branch>
                                         paths:
-                                          - deploy/terraform/vars/<+stage.variables.tfvars_env>.tfvars
+                                          - deploy/terraform/vars/<+infra.name>.tfvars
                                         connectorRef: mfjhellman
                               - varFile:
                                   identifier: from harness vars
@@ -260,21 +260,17 @@ pipeline:
         variables:
           - name: name
             type: String
-            description: ""
+            description: "Application name as used in k8s resources"
             value: hello-world
-          - name: tfvars_env
-            type: String
-            description: ""
-            value: <+input>
           - name: manifest_branch
             type: String
-            description: ""
+            description: "Branch of app repo to use for k8s manifests"
             value: <+input>
           - name: tfvars_branch
             type: String
-            description: ""
+            description: "Branch of app repo to use for terraform variables files"
             value: <+input>
           - name: tfconfig_branch
             type: String
-            description: ""
+            description: "Branch of app repo to use for terraform configuration"
             value: <+input>
