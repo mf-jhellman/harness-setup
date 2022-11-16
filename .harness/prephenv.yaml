@@ -23,7 +23,7 @@ inputSet:
                       - identifier: "http-echo"
                         type: "DockerRegistry"
                         spec:
-                          tag: "pr-<+trigger.prNumber>"
+                          tag: "<+input>"
           environment:
             environmentRef: "cdtooling2eksv2"
             infrastructureDefinitions:
@@ -36,10 +36,10 @@ inputSet:
         variables:
         - name: "manifest_branch"
           type: "String"
-          value: "main"
+          value: "<+trigger.sourceBranch>"
         - name: "tfvars_branch"
           type: "String"
-          value: "main"
+          value: "<+trigger.sourceBranch>"
         - name: "tfconfig_branch"
           type: "String"
-          value: "main"
+          value: "<+trigger.sourceBranch>"
