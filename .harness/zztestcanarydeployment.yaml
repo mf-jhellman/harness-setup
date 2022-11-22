@@ -69,10 +69,10 @@ pipeline:
                       primaryArtifactRef: <+input>
                       sources: <+input>
           environment:
-            environmentRef: cdtooling2eksv2
+            environmentRef: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: harnessdev
+              - identifier: cd-tooling-2-eks-v2
           execution:
             steps:
               - stepGroup:
