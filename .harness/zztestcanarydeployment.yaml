@@ -79,7 +79,7 @@ pipeline:
             environmentRef: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: cd-tooling-2-eks-v2
+              - identifier: cdtooling2eksv2
           execution:
             steps:
               - stepGroup:
