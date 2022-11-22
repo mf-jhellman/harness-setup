@@ -14,12 +14,28 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: ShellScript
+                  name: Get Environment from Image
+                  identifier: Get_Environment_from_Image
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: ENV_NAME=$(echo "<+trigger.artifact.build>" | sed 's/\(.*\)-.*$/\1/')
+                    environmentVariables: []
+                    outputVariables:
+                      - name: ENV_NAME
+                        type: String
+                        value: ENV_NAME
+                  timeout: 10m
+              - step:
                   name: Approve to Start Deployment
                   identifier: Approve_to_Start_Deployment
                   type: HarnessApproval
                   timeout: 1d
                   spec:
-                    approvalMessage: Approve to start the deployment
                     includePipelineExecutionHistory: true
                     approvers:
                       minimumCount: 1
@@ -27,9 +43,14 @@ pipeline:
                       userGroups:
                         - account._account_all_users
                     approverInputs: []
+                    approvalMessage: Approve to start deployment to <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
+                  when:
+                    stageStatus: Success
+                    condition: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "prod" or <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "rc"
+                  failureStrategies: []
         tags: {}
         when:
-          pipelineStatus: Failure
+          pipelineStatus: Success
     - stage:
         name: Canary Deploy
         identifier: Canary_Deploy
