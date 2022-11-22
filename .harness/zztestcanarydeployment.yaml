@@ -153,7 +153,7 @@ pipeline:
                                       paths:
                                         - deploy/k8s/base/values.yaml
                                       repoName: harness-test-app
-                                      branch: <+stage.variables.manifest_branch>
+                                      branch: main
                         timeout: 10m
                         failureStrategies: []
                     - step:
@@ -260,11 +260,11 @@ pipeline:
         variables:
           - name: name
             type: String
-            description: "Application name as used in k8s resources"
+            description: Application name as used in k8s resources
             value: hello-world
           - name: manifest_branch
             type: String
-            description: "Branch of app repo to use for k8s manifests"
+            description: Branch of app repo to use for k8s manifests
             value: <+input>
           - name: tfvars_branch
             type: String
@@ -272,5 +272,5 @@ pipeline:
             value: <+input>
           - name: tfconfig_branch
             type: String
-            description: "Branch of app repo to use for terraform configuration"
+            description: Branch of app repo to use for terraform configuration
             value: <+input>
