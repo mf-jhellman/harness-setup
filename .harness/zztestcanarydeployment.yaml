@@ -69,11 +69,10 @@ pipeline:
                       primaryArtifactRef: <+input>
                       sources: <+input>
           environment:
-            environmentRef: <+input>
+            environmentRef: cdtooling2eksv2
             deployToAll: false
-            environmentInputs: <+input>
-            serviceOverrideInputs: <+input>
-            infrastructureDefinitions: <+input>
+            infrastructureDefinitions:
+              - identifier: harnessdev
           execution:
             steps:
               - stepGroup:
