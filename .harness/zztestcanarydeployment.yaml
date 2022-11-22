@@ -23,7 +23,7 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: ENV_NAME=$(echo "<+trigger.artifact.build>" | sed 's/\(.*\)-.*$/\1/')
+                        script: ENV_NAME=$(echo "<+serviceConfig.artifacts.primary.tag>" | sed 's/\(.*\)-.*$/\1/')
                     environmentVariables: []
                     outputVariables:
                       - name: ENV_NAME
