@@ -53,7 +53,7 @@ pipeline:
                     approvalMessage: Approve to start deployment to <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                   when:
                     stageStatus: Success
-                    condition: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "prod" or <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "rc"
+                    condition: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "production" or <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "rc"
                   failureStrategies: []
         tags: {}
         when:
