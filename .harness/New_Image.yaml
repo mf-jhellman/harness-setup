@@ -30,7 +30,7 @@ inputSet:
                       - identifier: "http-echo"
                         type: "DockerRegistry"
                         spec:
-                          tag: "<+input>"
+                          tag: "<+trigger.artifact.build>"
     variables:
     - name: "teardown"
       type: "String"
