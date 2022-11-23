@@ -82,7 +82,7 @@ pipeline:
                       primaryArtifactRef: <+input>
                       sources: <+input>
           environment:
-            environmentRef: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
+            environmentRef: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
             deployToAll: false
             infrastructureDefinitions:
               - identifier: cdtooling2eksv2
