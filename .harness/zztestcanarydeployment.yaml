@@ -58,6 +58,11 @@ pipeline:
         tags: {}
         when:
           pipelineStatus: Success
+        variables:
+          - name: image_tag
+            type: String
+            description: ""
+            value: <+trigger.artifact.build>
     - stage:
         name: Canary Deploy
         identifier: Canary_Deploy
