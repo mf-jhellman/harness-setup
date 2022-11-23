@@ -50,10 +50,10 @@ pipeline:
                       userGroups:
                         - account._account_all_users
                     approverInputs: []
-                    approvalMessage: Approve to start deployment to <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
+                    approvalMessage: Approve to start deployment to <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                   when:
                     stageStatus: Success
-                    condition: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "prod" or <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "rc"
+                    condition: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "prod" or <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME> == "rc"
                   failureStrategies: []
         tags: {}
         when:
@@ -125,7 +125,7 @@ pipeline:
                                   connectorRef: mfjhellman
                                   repoName: harness-test-app
                                   folderPath: deploy/terraform
-                                  branch: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
+                                  branch: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                             secretManagerRef: harnessSecretManager
                             varFiles:
                               - varFile:
@@ -137,7 +137,7 @@ pipeline:
                                       spec:
                                         gitFetchType: Branch
                                         repoName: harness-test-app
-                                        branch: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
+                                        branch: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                                         paths:
                                           - deploy/terraform/vars/<+infra.name>.tfvars
                                         connectorRef: mfjhellman
@@ -186,7 +186,7 @@ pipeline:
                                       paths:
                                         - deploy/k8s/base/values.yaml
                                       repoName: harness-test-app
-                                      branch: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
+                                      branch: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                         timeout: 10m
                         failureStrategies: []
                     - step:
