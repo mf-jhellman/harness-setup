@@ -119,7 +119,7 @@ pipeline:
                                   connectorRef: mfjhellman
                                   repoName: harness-test-app
                                   folderPath: deploy/terraform
-                                  branch: <+stage.variables.tfconfig_branch>
+                                  branch: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                             secretManagerRef: harnessSecretManager
                             varFiles:
                               - varFile:
