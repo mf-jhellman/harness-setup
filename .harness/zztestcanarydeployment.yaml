@@ -279,7 +279,7 @@ pipeline:
                     headers: []
                     outputVariables: []
                     url: https://<+stage.variables.name>-<+infra.namespace>.dev.eiger.io/
-                  timeout: 10s
+                  timeout: 1m
                   when:
                     stageStatus: Success
                     condition: <+pipeline.variables.teardown> == "false"
