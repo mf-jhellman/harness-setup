@@ -139,7 +139,7 @@ pipeline:
                                         repoName: harness-test-app
                                         branch: <+pipeline.stages.Approve_to_Start_Deployment.spec.execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                                         paths:
-                                          - deploy/terraform/vars/<+infra.name>.tfvars
+                                          - deploy/terraform/vars/<+env.name>.tfvars
                                         connectorRef: mfjhellman
                               - varFile:
                                   identifier: from harness vars
