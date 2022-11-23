@@ -24,7 +24,7 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
-                          BUILD_TAG="<+serviceConfig.artifacts.primary.tag>"
+                          BUILD_TAG="<+stage.variables.image_tag>"
                           ENV_NAME=$(echo "${BUILD_TAG}" | sed 's/\(.*\)-.*$/\1/')
                           echo $BUILD_TAG
                           echo $ENV_NAME
