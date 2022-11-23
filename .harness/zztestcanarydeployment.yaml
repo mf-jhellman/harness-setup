@@ -287,7 +287,3 @@ pipeline:
             type: String
             description: Branch of app repo to use for terraform configuration
             value: <+input>
-          - name: artifact_tag
-            type: String
-            description: ""
-            value: <+input>
