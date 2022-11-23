@@ -1,0 +1,42 @@
+inputSet:
+  identifier: "New_Image"
+  name: "New Image"
+  orgIdentifier: "default"
+  projectIdentifier: "tiger"
+  pipeline:
+    identifier: "zztestcanarydeployment"
+    stages:
+    - stage:
+        identifier: "Approve_to_Start_Deployment"
+        type: "Approval"
+        variables:
+        - name: "image_tag"
+          type: "String"
+          value: "<+trigger.artifact.build>"
+    - stage:
+        identifier: "Canary_Deploy"
+        type: "Deployment"
+        spec:
+          service:
+            serviceInputs:
+              serviceDefinition:
+                type: "Kubernetes"
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: "http-echo"
+                      sources:
+                      - identifier: "http-echo"
+                        type: "DockerRegistry"
+                        spec:
+                          tag: "<+trigger.artifact.build>"
+        variables:
+        - name: "manifest_branch"
+          type: "String"
+          value: "<+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>"
+        - name: "tfvars_branch"
+          type: "String"
+          value: "<+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>"
+        - name: "tfconfig_branch"
+          type: "String"
+          value: "<+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>"
