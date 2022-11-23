@@ -324,7 +324,6 @@ pipeline:
             value: hello-world
         when:
           pipelineStatus: Success
-          condition: <+pipeline.variables.teardown> == "false"
   variables:
     - name: teardown
       type: String
