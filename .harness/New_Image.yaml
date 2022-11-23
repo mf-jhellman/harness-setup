@@ -1,6 +1,7 @@
 inputSet:
   identifier: "New_Image"
   name: "New Image"
+  tags: {}
   orgIdentifier: "default"
   projectIdentifier: "tiger"
   pipeline:
