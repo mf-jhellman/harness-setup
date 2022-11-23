@@ -219,7 +219,7 @@ pipeline:
                           spec:
                             sensitivity: HIGH
                             duration: 5m
-                            deploymentTag: <+trigger.artifact.build>
+                            deploymentTag: <+artifact.tag>
                         timeout: 2h
                         failureStrategies:
                           - onFailure:
