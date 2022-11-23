@@ -180,7 +180,7 @@ pipeline:
                                       paths:
                                         - deploy/k8s/base/values.yaml
                                       repoName: harness-test-app
-                                      branch: main
+                                      branch: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
                         timeout: 10m
                         failureStrategies: []
                     - step:
