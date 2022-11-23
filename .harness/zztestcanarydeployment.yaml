@@ -281,18 +281,3 @@ pipeline:
             type: String
             description: Application name as used in k8s resources
             value: hello-world
-          - name: manifest_branch
-            type: String
-            default: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
-            description: Branch of app repo to use for k8s manifests
-            value: <+input>
-          - name: tfvars_branch
-            type: String
-            default: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
-            description: "Branch of app repo to use for terraform variables files "
-            value: <+input>
-          - name: tfconfig_branch
-            type: String
-            default: <+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>
-            description: Branch of app repo to use for terraform configuration
-            value: <+input>

@@ -31,13 +31,3 @@ inputSet:
                         type: "DockerRegistry"
                         spec:
                           tag: "<+trigger.artifact.build>"
-        variables:
-        - name: "manifest_branch"
-          type: "String"
-          value: "<+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>"
-        - name: "tfvars_branch"
-          type: "String"
-          value: "<+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>"
-        - name: "tfconfig_branch"
-          type: "String"
-          value: "<+execution.steps.Get_Environment_from_Image.output.outputVariables.ENV_NAME>"
